@@ -1,8 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <TargetFrameworks>netcoreapp3.1;net6.0;net5.0;net48;net452</TargetFrameworks>
+    <IsPackable>true</IsPackable>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Authors>EasyMicroservices</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.0.1</Version>
+    <Description>default tests packages in programming.</Description>
+    <Copyright>EasyMicroservices@gmail.com</Copyright>
+    <PackageTags>utility,utilities,test,tests</PackageTags>
+    <PackageProjectUrl>https://github.com/EasyMicroservices/Tests</PackageProjectUrl>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
