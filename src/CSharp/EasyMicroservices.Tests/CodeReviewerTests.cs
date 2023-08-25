@@ -1,7 +1,9 @@
 using CodeReviewer.Engine;
 using CodeReviewer.Structures;
 using CodeReviewer.Tests;
-using Xunit;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace EasyMicroservices.Tests
 {
@@ -25,6 +27,60 @@ namespace EasyMicroservices.Tests
             CustomCodeReviewerManager.AddFastCustomCodeReviewer(type => type.Namespace.Contains(".Contracts.Requests") && !type.Name.EndsWith("RequestContract") ? ("Suffix name of type", "is not a valid name! suffix have to be 'RequestContract'") : default);
             CustomCodeReviewerManager.AddFastCustomCodeReviewer(type => type.Namespace.Contains(".Contracts.Responses") && !type.Name.EndsWith("ResponseContract") ? ("Suffix name of type", "is not a valid name! suffix have to be 'ResponseContract'") : default);
             CustomCodeReviewerManager.AddFastCustomCodeReviewer(type => type.Namespace.Contains(".Contracts.Common") && (type.Name.EndsWith("ResponseContract") || type.Name.EndsWith("RequestContract")) ? ("Suffix name of type", "is not a valid name! suffix have to be 'Contract' not 'Request' or 'Response'") : default);
+            //check stream
+            CustomCodeReviewerManager.AddStreamCustomCodeReviewer(stream =>
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                using var reader = new StreamReader(stream);
+                var text = reader.ReadToEnd();
+                if (text.ToLower().Contains("password="))
+                    return "Text 'Password=' found in your source files! please remove it!";
+                return null;
+            });
+
+            foreach (var filePath in GetCheckFiles())
+            {
+                var file = new FileInfo(filePath);
+                if (file.Length > 1024 * 1024 * 2)
+                    continue;
+                AssemblyManager.AddStreamsToReview(new MemoryStream(File.ReadAllBytes(filePath)));
+            }
+        }
+
+        static string GetSolutionPath()
+        {
+            var directory = AppDomain.CurrentDomain.BaseDirectory;
+            string file = default;
+            do
+            {
+                directory = Path.GetDirectoryName(directory);
+                file = Directory.GetFiles(directory).FirstOrDefault(x => x.EndsWith(".sln", StringComparison.OrdinalIgnoreCase));
+            }
+            while (file == null);
+            return directory;
+        }
+
+        static string[] GetCheckFiles()
+        {
+            var path = GetSolutionPath();
+            var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+            var extensions = new string[]
+            {
+                "sln",
+                "csproj",
+                "cs",
+                "txt",
+                "json"
+            };
+            var excludes = new string[]
+            {
+                "bin",
+                "obj",
+                "debug",
+                "release"
+            };
+
+            return files.Where(x => !excludes.Any(e => x.ToLower().Contains($"{Path.DirectorySeparatorChar}{e}{Path.DirectorySeparatorChar}".ToLower())) && extensions.Any(e => x.EndsWith(e, StringComparison.OrdinalIgnoreCase))).ToArray();
         }
     }
 }
