@@ -6,7 +6,7 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Authors>EasyMicroservices</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.0.4</Version>
+    <Version>0.0.0.5</Version>
     <Description>default tests packages in programming.</Description>
     <Copyright>EasyMicroservices@gmail.com</Copyright>
     <PackageTags>utility,utilities,test,tests</PackageTags>
@@ -15,12 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeReviewer" Version="1.1.0" />
+    <PackageReference Include="CodeReviewer" Version="1.1.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
     <PackageReference Include="coverlet.msbuild" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
