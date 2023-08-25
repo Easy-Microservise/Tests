@@ -80,7 +80,7 @@ namespace EasyMicroservices.Tests
                 "release"
             };
 
-            return files.Where(x => !excludes.Any(e => x.Contains($"{Path.DirectorySeparatorChar}{e}{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase)) && extensions.Any(e => x.EndsWith(e, StringComparison.OrdinalIgnoreCase))).ToArray();
+            return files.Where(x => !excludes.Any(e => x.ToLower().Contains($"{Path.DirectorySeparatorChar}{e}{Path.DirectorySeparatorChar}".ToLower())) && extensions.Any(e => x.EndsWith(e, StringComparison.OrdinalIgnoreCase))).ToArray();
         }
     }
 }
