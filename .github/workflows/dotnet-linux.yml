@@ -20,6 +20,6 @@ jobs:
             6.0.x
             7.0.x
       - name: Restore dependencies
-        run: dotnet restore ./src/CSharp/EasyMicroservices.CommentsMicroservice.sln
+        run: dotnet restore ./src/CSharp/EasyMicroservices.Tests.sln
       - name: Build
-        run: dotnet build ./src/CSharp/EasyMicroservices.CommentsMicroservice.sln --no-restore
+        run: dotnet build ./src/CSharp/EasyMicroservices.Tests.sln --no-restore
