@@ -1,0 +1,25 @@
+name: MacOS (dotnet build and test)
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  os-tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version:  |
+            3.1.x
+            5.0.x
+            6.0.x
+            7.0.x
+      - name: Restore dependencies
+        run: dotnet restore ./src/CSharp/EasyMicroservices.Tests.sln
+      - name: Build
+        run: dotnet build ./src/CSharp/EasyMicroservices.Tests.sln --no-restore
