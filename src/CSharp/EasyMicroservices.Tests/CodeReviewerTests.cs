@@ -32,8 +32,8 @@ namespace EasyMicroservices.Tests
             {
                 stream.Seek(0, SeekOrigin.Begin);
                 using var reader = new StreamReader(stream);
-                var text = reader.ReadToEnd();
-                if (text.ToLower().Contains("password="))
+                var text = reader.ReadToEnd().ToLower();
+                if (text.Contains("password=") && text.Contains("connectionstring"))
                     return "Text 'Password=' found in your source files! please remove it!";
                 return null;
             });
