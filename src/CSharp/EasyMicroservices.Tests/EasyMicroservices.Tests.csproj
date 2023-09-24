@@ -6,32 +6,13 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Authors>EasyMicroservices</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.0.8</Version>
+    <Version>0.0.0.9</Version>
     <Description>default tests packages in programming.</Description>
     <Copyright>EasyMicroservices@gmail.com</Copyright>
     <PackageTags>utility,utilities,test,tests,xunit,unit,unittest</PackageTags>
     <PackageProjectUrl>https://github.com/EasyMicroservices/Tests</PackageProjectUrl>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  
-  <Choose>
-    <When Condition="'$(TargetFramework)' == 'net452' or '$(TargetFramework)' == 'netcoreapp3.1'">
-      <ItemGroup>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0">
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-          <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.1">
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-          <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
   
   <ItemGroup>
     <PackageReference Include="CodeReviewer" Version="1.1.2" />
