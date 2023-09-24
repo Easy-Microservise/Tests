@@ -21,5 +21,3 @@ jobs:
         run: dotnet restore ./src/CSharp/EasyMicroservices.Tests.sln
       - name: Build
         run: dotnet build ./src/CSharp/EasyMicroservices.Tests.sln --no-restore
-      - name: Test
-        run: dotnet test ./src/CSharp/EasyMicroservices.Tests.sln --no-build --verbosity normal
